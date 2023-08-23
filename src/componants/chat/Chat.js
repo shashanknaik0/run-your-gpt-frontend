@@ -1,22 +1,46 @@
 import React, { useState, useCallback, useEffect } from 'react';
 import useWebSocket, { ReadyState } from 'react-use-websocket';
+import './Chat.css';
 
 const Chat = () => {
-    const [socketUrl, setSocketUrl] = useState( 'wss://couple-portsmouth-devoted-stomach.trycloudflare.com/api/v1/chat-stream');
+    const [socketUrlHost, setSocketUrlHost] = useState('wss://sample');
     const [response, setResponse] = useState("");
-    const [previouseReasponse, setPreviouseReasponse] = useState([])
+    var dummy=[
+        {
+            user_input: "React Hook useCallback has missing dependencies: 'request' and 'sendJsonMessage'. Either include them or remove the dependency array", 
+            response : "React Hook useCallback has missing dependencies: 'request' and 'sendJsonMessage'. Either include them or remove the dependency array React Hook useCallback has missing dependencies: 'request' and 'sendJsonMessage'. Either include them or remove the dependency array React Hook useCallback has missing dependencies: 'request' and 'sendJsonMessage'. Either include them or remove the dependency array"
+        },
+        {
+            user_input: "React Hook useCallback has missing dependencies: 'request' and 'sendJsonMessage'. Either include them or remove the dependency array", 
+            response : "React Hook useCallback has missing dependencies: 'request' and 'sendJsonMessage'. Either include them or remove the dependency array React Hook useCallback has missing dependencies: 'request' and 'sendJsonMessage'. Either include them or remove the dependency array React Hook useCallback has missing dependencies: 'request' and 'sendJsonMessage'. Either include them or remove the dependency array"
+        },
+        {
+            user_input: "React Hook useCallback has missing dependencies: 'request' and 'sendJsonMessage'. Either include them or remove the dependency array", 
+            response : "React Hook useCallback has missing dependencies: 'request' and 'sendJsonMessage'. Either include them or remove the dependency array React Hook useCallback has missing dependencies: 'request' and 'sendJsonMessage'. Either include them or remove the dependency array React Hook useCallback has missing dependencies: 'request' and 'sendJsonMessage'. Either include them or remove the dependency array"
+        },
+        {
+            user_input: "React Hook useCallback has missing dependencies: 'request' and 'sendJsonMessage'. Either include them or remove the dependency array", 
+            response : "React Hook useCallback has missing dependencies: 'request' and 'sendJsonMessage'. Either include them or remove the dependency array React Hook useCallback has missing dependencies: 'request' and 'sendJsonMessage'. Either include them or remove the dependency array React Hook useCallback has missing dependencies: 'request' and 'sendJsonMessage'. Either include them or remove the dependency array"
+        },
+        {
+            user_input: "React Hook useCallback has missing dependencies: 'request' and 'sendJsonMessage'. Either include them or remove the dependency array", 
+            response : "React Hook useCallback has missing dependencies: 'request' and 'sendJsonMessage'. Either include them or remove the dependency array React Hook useCallback has missing dependencies: 'request' and 'sendJsonMessage'. Either include them or remove the dependency array React Hook useCallback has missing dependencies: 'request' and 'sendJsonMessage'. Either include them or remove the dependency array"
+        },
+    ]
+    const [previouseReasponse, setPreviouseReasponse] = useState(dummy)
 
-    const { sendJsonMessage, lastJsonMessage, readyState } = useWebSocket(socketUrl);
+    const { sendJsonMessage, lastJsonMessage, readyState } = useWebSocket(socketUrlHost);
 
     useEffect(() => {
         if (lastJsonMessage !== null) {
-            if(lastJsonMessage.event == 'text_stream'){
+            if(lastJsonMessage.event === 'text_stream'){
                 setResponse(lastJsonMessage.history.visible[0][1])
-            }else if(lastJsonMessage.event=='stream_end'){
+            }else if(lastJsonMessage.event==='stream_end'){
                 console.log(previouseReasponse)
-                setPreviouseReasponse( pre =>[...pre, {user_input: user_input, response : response}])
+                setPreviouseReasponse( pre =>[...pre, {user_input: userInput, response : response}])
                 console.log(previouseReasponse)
                 setResponse("")
+                setUserInput("")
             }
         }
     }, [lastJsonMessage]);
@@ -29,11 +53,11 @@ const Chat = () => {
         [ReadyState.UNINSTANTIATED]: 'Uninstantiated',
     }[readyState];
 
-    var user_input = "Please give me a step-by-step guide on how to plant a tree in my backyard.)"
+    const [userInput, setUserInput] = useState("")
     var history = {'internal': [], 'visible': []}
     
     var request = {
-        'user_input': user_input,
+        'user_input': userInput,
         'max_new_tokens': 250,
         'auto_max_new_tokens': false,
         'history': history,
@@ -83,16 +107,21 @@ const Chat = () => {
         'stopping_strings': []
     }
     
-    const handleClickSendMessage = useCallback(() => sendJsonMessage(request), []);
-
+    const handleClickSendMessage = useCallback(() => {
+        setUserInput(document.getElementById('user-input').value)
+        sendJsonMessage(request)
+    }, []);
+    const handleReconnect = () =>{
+        setSocketUrlHost(document.getElementById('socketURLHost').value)
+    }
     return (
         <div className='body'>
             <div className='info'>
-                <span id="status">The WebSocket is currently {connectionStatus}</span>
+                <b id="status">The WebSocket is currently {connectionStatus}</b>
                 <div>
                     {/* for our convinience */}
-                    <input id="socketURL" placeholder='Enter socketURL'/>
-                    <button id="reconnect" onClick={()=>setSocketUrl(document.getElementById('socketURL').value)}>
+                    <input id="socketURLHost" type="text" placeholder='Enter socketURLHost'/>
+                    <button id="reconnect" onClick={handleReconnect}>
                         Reconnect
                     </button>
                 </div>
@@ -105,12 +134,18 @@ const Chat = () => {
                         <pre className='response'>{data.response}</pre>
                     </div>
                 ))}
-                <pre className='response'>{response}</pre>
+                {(userInput !== "")?(
+                    <>
+                        <div className='user-input'>{userInput}</div>
+                        <pre className='response'>{response}</pre>
+                    </>
+                ):("")}
             </div>
 
             <div className='input'>
-                <input id="user-input" placeholder='Ask me anything'/>
+                <input id="user-input" type="text" placeholder='Ask me anything'/>
                 <button
+                    id='send'
                     onClick={handleClickSendMessage}
                     disabled={readyState !== ReadyState.OPEN}
                 >
