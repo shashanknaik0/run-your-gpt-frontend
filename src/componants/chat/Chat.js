@@ -96,7 +96,7 @@ const Chat = () => {
         event.preventDefault();
         setUserInput(form.userinput.value)
         request['user_input'] = form.userinput.value
-        document.getElementById('user-input').value = ""
+        form.userinput.value = ""
         sendJsonMessage(request)
     }, []);
 
