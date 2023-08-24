@@ -1,7 +1,8 @@
 import { useEffect } from 'react';
 import './Chat.css';
 import useWebSocketService from './useWebSocketService';
-import apiService from '../../helper/apiService';
+import chatService from './chatService';
+
 
 const Chat = () => {
     const { 
@@ -17,13 +18,8 @@ const Chat = () => {
         setPreviouseReasponse
     } = useWebSocketService();
 
-    const getMessage = async()=>{
-        var response = await apiService.get('message/')
-        return response
-    }
-
     useEffect(()=>{
-        getMessage().then((response)=>{
+        chatService.getMessage().then((response)=>{
             setPreviouseReasponse(response.data)
         })
     },[])

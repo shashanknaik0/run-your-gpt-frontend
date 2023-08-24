@@ -1,27 +1,34 @@
 import React, { useState, useCallback, useEffect } from 'react';
 import useWebSocket, { ReadyState } from 'react-use-websocket';
+import chatService from './chatService';
 
 const useWebSocketService=()=>{
     const [socketUrlHost, setSocketUrlHost] = useState('sample');
     const [response, setResponse] = useState("");
     const [userInput, setUserInput] = useState("")
     const [previouseReasponse, setPreviouseReasponse] = useState([])
+
+    var scrollDiv;
+    if(document.getElementById("interactions")){
+        scrollDiv = document.getElementById("interactions");
+        scrollDiv.scrollTop = scrollDiv.scrollHeight;
+    }
     
     const { sendJsonMessage, lastJsonMessage, readyState } = useWebSocket("wss://" + socketUrlHost + "/api/v1/chat-stream");
+
     useEffect(() => {
         if (lastJsonMessage !== null) {
             if (lastJsonMessage.event === 'text_stream') {
                 setResponse(lastJsonMessage.history.visible[0][1])
             } else if (lastJsonMessage.event === 'stream_end') {
                 setPreviouseReasponse(pre => [...pre, { user_input: userInput, response: response }])
+                chatService.postMessage({ user_input: userInput, response: response })
                 setResponse("")
                 setUserInput("")
             }
         }
-        var scrollDiv = document.getElementById("interactions");
-        scrollDiv.scrollTop = scrollDiv.scrollHeight;
     }, [lastJsonMessage, setResponse]);
-
+    
     const connectionStatus = {
         [ReadyState.CONNECTING]: 'Connecting',
         [ReadyState.OPEN]: 'Open',
