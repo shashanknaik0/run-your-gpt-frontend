@@ -25,5 +25,14 @@ export default {
             console.log(err)
             return []
         }
-    }
+    },
+    getMessageCount: async() =>{
+        try {
+            var response = await apiService.get('message/count')
+            return response
+        } catch (err) {
+            console.log(err)
+            return []
+        }
+    },
 }

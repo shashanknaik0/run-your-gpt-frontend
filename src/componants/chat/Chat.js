@@ -8,6 +8,9 @@ const Chat = ({setAuthenticated}) => {
     const { 
         handleReconnect,
         handleClickSendMessage,
+        setPreviouseReasponse,
+        setRemainingMsg,
+        remaingMsg,
         statusColor,
         connectionStatus,
         ReadyState,
@@ -15,12 +18,14 @@ const Chat = ({setAuthenticated}) => {
         response,
         previouseReasponse,
         userInput,
-        setPreviouseReasponse
     } = useWebSocketService();
+
+
 
     useEffect(()=>{
         chatService.getMessage().then((response)=>{
             setPreviouseReasponse(response.data)
+            setRemainingMsg(25-response.data.length)
         })
     },[])
 
@@ -31,12 +36,16 @@ const Chat = ({setAuthenticated}) => {
         setAuthenticated(false)
         chatService.logout()
     }
+
     return (
         <div className='body'>
             <div className='info'>
                 <div className='hover'>
-                    <div id='logout' onClick={handleLogout}>
+                    <div className='hover-info' id='logout' onClick={handleLogout}>
                         logout
+                    </div>
+                    <div className='hover-info'>
+                        {remaingMsg}
                     </div>
                 </div>
                 <b id="status" style={{ color: statusColor[connectionStatus] }}>The WebSocket is currently {connectionStatus}</b>
@@ -72,7 +81,7 @@ const Chat = ({setAuthenticated}) => {
                     <button
                         id='send'
                         style={{ backgroundColor: statusColor[connectionStatus] }}
-                        disabled={connectionStatus !== 'Open'}
+                        // disabled={connectionStatus !== 'Open'}
                     >
                         Send
                     </button>

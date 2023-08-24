@@ -87,12 +87,16 @@ input[type=text] {
 .hover{
     position: absolute;
     z-index: 10;
-    top: 15px;
+    top: 5px;
 }
 #logout{
+    cursor: pointer;
+    margin-bottom: 5px;
+}
+
+.hover-info{
     background-color: #4CAF50;
     color: white;
     padding: 5px 10px;
     border-radius: 20px;
-    cursor: pointer;
 }

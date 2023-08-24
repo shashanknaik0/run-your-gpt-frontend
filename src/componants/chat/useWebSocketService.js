@@ -5,8 +5,9 @@ import chatService from './chatService';
 const useWebSocketService=()=>{
     const [socketUrlHost, setSocketUrlHost] = useState('sample');
     const [response, setResponse] = useState("");
-    const [userInput, setUserInput] = useState("")
-    const [previouseReasponse, setPreviouseReasponse] = useState([])
+    const [userInput, setUserInput] = useState("");
+    const [previouseReasponse, setPreviouseReasponse] = useState([]);
+    const [remaingMsg, setRemainingMsg] = useState();
 
     var scrollDiv;
     if(document.getElementById("interactions")){
@@ -23,6 +24,7 @@ const useWebSocketService=()=>{
             } else if (lastJsonMessage.event === 'stream_end') {
                 setPreviouseReasponse(pre => [...pre, { user_input: userInput, response: response }])
                 chatService.postMessage({ user_input: userInput, response: response })
+                setRemainingMsg(remaingMsg-1)
                 setResponse("")
                 setUserInput("")
             }
@@ -100,10 +102,17 @@ const useWebSocketService=()=>{
     const handleClickSendMessage = useCallback((event) => {
         let form = event.target
         event.preventDefault();
-        setUserInput(form.userinput.value)
-        request['user_input'] = form.userinput.value
-        form.userinput.value = ""
-        sendJsonMessage(request)
+        chatService.getMessageCount().then((response)=>{
+            if(25 - response.data > 0){
+                setUserInput(form.userinput.value)
+                request['user_input'] = form.userinput.value
+                form.userinput.value = ""
+                sendJsonMessage(request)
+            }else{
+                alert("message limit reached")
+            }
+        })
+        
     }, []);
 
     const handleReconnect = (event) => {
@@ -115,14 +124,16 @@ const useWebSocketService=()=>{
     return {
         handleReconnect: handleReconnect,
         handleClickSendMessage: handleClickSendMessage,
+        setPreviouseReasponse:setPreviouseReasponse,
+        setRemainingMsg:setRemainingMsg,
+        remaingMsg:remaingMsg,
         statusColor:statusColor,
         connectionStatus:connectionStatus,
         ReadyState:ReadyState,
         readyState:readyState,
         response:response,
         previouseReasponse:previouseReasponse,
-        userInput:userInput,
-        setPreviouseReasponse:setPreviouseReasponse
+        userInput:userInput
     }
 }
 
