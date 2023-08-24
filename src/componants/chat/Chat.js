@@ -13,9 +13,20 @@ const Chat = () => {
         readyState,
         response,
         previouseReasponse,
-        userInput
+        userInput,
+        setPreviouseReasponse
     } = useWebSocketService();
 
+    const getMessage = async()=>{
+        var response = await apiService.get('message/')
+        return response
+    }
+
+    useEffect(()=>{
+        getMessage().then((response)=>{
+            setPreviouseReasponse(response.data)
+        })
+    },[])
 
     return (
         <div className='body'>

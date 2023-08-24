@@ -115,6 +115,7 @@ const useWebSocketService=()=>{
         response:response,
         previouseReasponse:previouseReasponse,
         userInput:userInput,
+        setPreviouseReasponse:setPreviouseReasponse
     }
 }
 

@@ -63,19 +63,20 @@ input[type=text] {
 }
 
 .user-input{
-    background-color: #4CAF50;
-    color: white;
-    padding: 8px 1px;
+    background-color: #ffe8bc;
+    color: hsl(0, 100%, 21%);
+    padding: 5px 20px;
     box-sizing: border-box;
     border-radius: 20px;
 }
 .response{
-    background-color: #ffe8bc;
-    color: #6b0000;
+    background-color: #4CAF50;
+    color: white;
+    font-size: large;
     overflow-x: auto;
     white-space: pre-wrap;
     word-wrap: break-word;
-    padding: 10px 20px;
+    padding: 5px 20px;
     box-sizing: border-box;
     border-radius: 20px;
 }
