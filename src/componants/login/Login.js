@@ -19,6 +19,7 @@ const Login = ({setAuthenticated}) => {
             let response = await apiService.post('login', data)
             console.log(response.data)
             cookies.set('isloggedin', 'True',{path:"/",maxAge:1209600})
+            cookies.set('uname', data.uname,{path:"/",maxAge:1209600})
             setAuthenticated(true)
             navigate('/',{replace:true})
         } catch (err) {
