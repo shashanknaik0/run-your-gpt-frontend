@@ -13,7 +13,7 @@ const RootRouter = () => {
             <Routes>
             <Route path="/" element={<Layout/>}>
                 <Route exact path="/" element={<ProtectedRoute setAuthenticated={setAuthenticated}/>} >
-                    <Route exact path="/" element={<Chat />} />
+                    <Route exact path="/" element={<Chat setAuthenticated={setAuthenticated}/>} />
                 </Route>
                 <Route exact path="/signup" element={<Signup />} />
                 <Route exact path="/login" element={<Login setAuthenticated={setAuthenticated}  />} />

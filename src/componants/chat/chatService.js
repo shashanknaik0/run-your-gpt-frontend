@@ -17,5 +17,13 @@ export default {
         }catch(err){
             console.log(err)
         }
+    },
+    logout: async() =>{
+        try {
+            await apiService.get('logout/')
+        } catch (err) {
+            console.log(err)
+            return []
+        }
     }
 }

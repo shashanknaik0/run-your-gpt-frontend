@@ -1,10 +1,10 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import './Chat.css';
 import useWebSocketService from './useWebSocketService';
 import chatService from './chatService';
+import Cookies from "universal-cookie";
 
-
-const Chat = () => {
+const Chat = ({setAuthenticated}) => {
     const { 
         handleReconnect,
         handleClickSendMessage,
@@ -24,9 +24,21 @@ const Chat = () => {
         })
     },[])
 
+    const cookies = new Cookies();
+    const handleLogout = () => {
+        cookies.remove("isloggedin")
+        cookies.remove("uname")
+        setAuthenticated(false)
+        chatService.logout()
+    }
     return (
         <div className='body'>
             <div className='info'>
+                <div className='hover'>
+                    <div id='logout' onClick={handleLogout}>
+                        logout
+                    </div>
+                </div>
                 <b id="status" style={{ color: statusColor[connectionStatus] }}>The WebSocket is currently {connectionStatus}</b>
                 <div onSubmit={handleReconnect}>
                     {/* for our convinience */}
@@ -36,7 +48,7 @@ const Chat = () => {
                             Reconnect
                         </button>
                     </form>
-                </div>
+                </div>  
             </div>
 
             <div className='interactions' id='interactions'>
@@ -59,7 +71,8 @@ const Chat = () => {
                     <input id="user-input" type="text" name='userinput' placeholder='Ask me anything' />
                     <button
                         id='send'
-                        disabled={readyState !== ReadyState.OPEN}
+                        style={{ backgroundColor: statusColor[connectionStatus] }}
+                        disabled={connectionStatus !== 'Open'}
                     >
                         Send
                     </button>

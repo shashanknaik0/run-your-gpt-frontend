@@ -83,3 +83,16 @@ input[type=text] {
 .message-block{
     margin-top: 20px;
 }
+
+.hover{
+    position: absolute;
+    z-index: 10;
+    top: 15px;
+}
+#logout{
+    background-color: #4CAF50;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 20px;
+    cursor: pointer;
+}
