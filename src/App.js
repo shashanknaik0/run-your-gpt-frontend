@@ -1,11 +1,10 @@
-import logo from './logo.svg';
 import './App.css';
-import Chat from './componants/chat/Chat';
+import RootRouter from "./componants/router/RootRouter";
 
 function App() {
   return (
     <div className="App">
-      <Chat />
+      <RootRouter/>
     </div>
   );
 }
