@@ -1,70 +1,52 @@
-# Getting Started with Create React App
+# run-your-gpt - Instructions for setting up and running the application
+<hr>
+<h2>Clone the repo</h2>
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+step 1: use below cammand to clone the repo
 
-## Available Scripts
+<pre>
+git clone https://github.com/shashanknaik0/run-your-gpt-frontend.git
+</pre>
 
-In the project directory, you can run:
 
-### `npm start`
+step 2: get into the directory
+<pre>
+cd run-your-gpt-frontend
+</pre>
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+<hr>
+<h2>Install dependecies</h2>
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+step 1: use below cammand install dependecies from <code>package.json</code>
+<pre>
+npm install
+</pre>
 
-### `npm test`
+<hr>
+<h2>Setup the backend</h2>
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+use <a href="https://github.com/shashanknaik0/run-your-gpt-backend.git">this</a> link to setup backend, instructions are given in that repo.
 
-### `npm run build`
+<hr>
+<h2>Run the project</h2>
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+use below cammand to run app in localhost.
+<pre>
+npm start
+</pre>
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+<hr>
+<h2>Result</h2>
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+<h4>Login page</h4>
+<img src="screenshots/login.png" alt="Loading....">
 
-### `npm run eject`
+<h4>Signup page</h4>
+<img src="screenshots/signup.png" alt="Loading....">
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+<h4>Ai chat page</h4>
+<img src="screenshots/main.png" alt="Loading....">
+<p>Run <a href="https://colab.research.google.com/drive/1BkL7zYVYtn0JPYKMPJ0tJmK-zMtINx0P?usp=sharing#scrollTo=T6oyrr4X0wc2">this</a> Ai model to get web socket URL ("wss://smaple.trycloudflare.com/api/v1/stream" if this is the public url only use "smaple.trycloudflare.com" part in input field)</p>
+<img src="screenshots/main2.png" alt="Loading....">
+<p>when msg limit is reached it will give alert</p>
+<img src="screenshots/main3.png" alt="Loading....">
