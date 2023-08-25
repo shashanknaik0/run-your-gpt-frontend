@@ -40,7 +40,7 @@ const Signup = () => {
             <label for="pwd">Password</label>
             <input type="password" id="pwd" name="pwd" placeholder="Password" required />
             <input type="submit" value="Submit" />
-            <a href="" onClick={()=>navigate('/login',{replace:true})}>already have account?..login</a>
+            <span className="link" onClick={()=>navigate('/login',{replace:true})}>already have account?..login</span>
         </form>
         </div>
     )

@@ -35,7 +35,7 @@ const Login = ({setAuthenticated}) => {
             <label for="pwd">Password</label>
             <input type="password" id="pwd" name="pwd" placeholder="Password" required />
             <input type="submit" value="Submit" />
-            <a href="" onClick={()=>navigate('/signup',{replace:true})}>new user?..signup</a>
+            <span className="link" onClick={()=>navigate('/signup',{replace:true})}>new user?..signup</span>
         </form>
         </div>
     )

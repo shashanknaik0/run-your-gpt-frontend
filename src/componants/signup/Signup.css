@@ -33,3 +33,13 @@ input[type=submit]:hover {
     margin: auto;
     margin-top: 5%;
 }
+
+.link{
+    color: blue;
+    cursor: pointer;
+}
+
+.link:hover{
+    color: #6c1cc7;
+    text-decoration: underline;
+}
