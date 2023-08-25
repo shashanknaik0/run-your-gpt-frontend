@@ -13,8 +13,6 @@ const Chat = ({setAuthenticated}) => {
         remaingMsg,
         statusColor,
         connectionStatus,
-        ReadyState,
-        readyState,
         response,
         previouseReasponse,
         userInput,

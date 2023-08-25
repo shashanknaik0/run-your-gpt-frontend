@@ -16,14 +16,14 @@ export default {
             return response
         }catch(err){
             console.log(err)
+            return []
         }
     },
     logout: async() =>{
         try {
-            await apiService.get('logout/')
+            await apiService.get('logout')
         } catch (err) {
             console.log(err)
-            return []
         }
     },
     getMessageCount: async() =>{
@@ -32,7 +32,7 @@ export default {
             return response
         } catch (err) {
             console.log(err)
-            return []
+            return ""
         }
     },
 }
