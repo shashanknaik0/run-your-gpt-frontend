@@ -22,7 +22,7 @@ const Signup = () => {
             navigate('/login',{replace:true})
 
         } catch (err) {
-            console.log(err)
+            alert("user already exist, try diferent username")
         }
     }
 

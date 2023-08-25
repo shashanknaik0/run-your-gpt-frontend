@@ -23,7 +23,7 @@ const Login = ({setAuthenticated}) => {
             setAuthenticated(true)
             navigate('/',{replace:true})
         } catch (err) {
-            alert(err)
+            alert("Invalid Credentials")
         }
     }
 
